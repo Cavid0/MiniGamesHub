@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rəqəm Təxmin Oyunu</title>
+    <title>Smart Guess</title>
     <style>
         * {
             margin: 0;
@@ -207,7 +207,7 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>🎯 Rəqəm Təxmin Oyunu</h1>
+        <h1>🎯 Smart Guess</h1>
         <p class="subtitle">1 ilə 100 arasında bir rəqəm təxmin edin!</p>
         
         <div class="game-info">
@@ -272,7 +272,6 @@
             attempts++;
             document.getElementById('currentAttempt').textContent = attempts;
             
-            // Tarixçəyə əlavə et
             gameHistory.push({
                 guess: guess,
                 attempt: attempts,
@@ -336,14 +335,12 @@
             }
         }
 
-        // Enter düyməsi ilə təxmin etmək
         document.getElementById('guessInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 makeGuess();
             }
         });
 
-        // Oyunu başlat
         initGame();
     </script>
 </body>
