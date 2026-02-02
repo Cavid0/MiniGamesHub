@@ -1,40 +1,34 @@
-# Smart Guess
+# 🎮 MiniGamesHub
 
-A modern, beautiful number guessing game with a dark theme UI.
+A collection of interactive, browser-based mini-games with a modern, neon-styled interface.
 
-## Features
+**🌐 Play Live:** [cavid0.github.io/MiniGamesHub](https://cavid0.github.io/MiniGamesHub/)
 
-- Premium dark theme design
-- Instant game start
-- Real-time feedback and hints
-- Progress tracking
-- Guess history panel
-- Win/lose modal with confetti animation
-- Fully responsive
-- Keyboard shortcuts
+## 🕹️ Games
 
-## How to Play
+### 🔐 Code Breaker Pro
+A logic-based puzzle game where you must decrypt a secure 4-digit sequence.
+- **Features:**
+  - Neon Cyberpunk UI
+  - Drag & Drop interface (numeric inputs)
+  - Visual feedback system (Green = Correct Position, Yellow = Wrong Position)
+  - 6 Attempts limit
+  - Dynamic progress tracking
 
-1. Open `index.html` in your browser
-2. Enter a number between 1 and 100
-3. Get instant feedback and hints
-4. Win by guessing correctly within 5 attempts
+### 🎲 Number Guess Challenge
+Test your intuition by guessing a number between 1 and 100.
+- **Features:**
+  - "Hot or Cold" feedback mechanism
+  - Circular progress tracking
+  - Visual history log
+  - Confetti celebration on win
 
-## Files
+## 🚀 How to Run
+Simply open `index.html` in any modern web browser. No installation or server required.
 
-- `index.html` - Game structure
-- `style.css` - Modern dark theme styling
-- `script.js` - Game logic
-
-## Keyboard Shortcuts
-
-- **Enter** - Submit guess
-- **N** - New game
-- **Escape** - Close modal
-
-## Technologies
-
+## 🛠️ Technologies
 - HTML5
-- CSS3 with modern animations
-- Vanilla JavaScript
+- CSS3 (Variables, Flexbox, Grid, Animations)
+- Vanilla JavaScript (ES6+)
+- Google Fonts (Outfit, JetBrains Mono)
 

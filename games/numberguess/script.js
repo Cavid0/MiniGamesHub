@@ -2,6 +2,8 @@ let randomNumber = 0;
 let attempts = 0;
 const maxAttempts = 5;
 let gameActive = false;
+let minBoundary = 1;
+let maxBoundary = 100;
 
 const elements = {
     newGame: document.getElementById('new-game'),
@@ -9,8 +11,7 @@ const elements = {
     playAgain: document.getElementById('play-again'),
     guessInput: document.getElementById('guess-input'),
     currentAttempt: document.getElementById('current-attempt'),
-    progressFill: document.getElementById('progress-fill'),
-    progressPercent: document.getElementById('progress-percent'),
+    progressFill: document.getElementById('circular-fill'),
     feedbackArea: document.getElementById('feedback-area'),
     hintArea: document.getElementById('hint-area'),
     historyList: document.getElementById('history-list'),
@@ -46,10 +47,11 @@ function initializeGame() {
     randomNumber = Math.floor(Math.random() * 100) + 1;
     attempts = 0;
     gameActive = true;
+    minBoundary = 1;
+    maxBoundary = 100;
     
     elements.currentAttempt.textContent = '0';
-    elements.progressFill.style.width = '0%';
-    elements.progressPercent.textContent = '0%';
+    if (elements.progressFill) elements.progressFill.setAttribute('stroke-dasharray', '0, 100');
     elements.guessInput.value = '';
     elements.guessInput.disabled = false;
     elements.submitGuess.disabled = false;
@@ -96,11 +98,8 @@ function submitGuess() {
 }
 
 function updateProgress() {
-    // 100 is full, 0 is empty. We want 0 attempts to be empty.
     const percentage = (attempts / maxAttempts) * 100;
     
-    // Circular progress stroke-dashoffset calculation
-    // Circle circumference = 100 (due to path pathLength or dasharray 0,100 trick)
     const circle = document.getElementById('circular-fill');
     if (circle) {
         circle.setAttribute('stroke-dasharray', `${percentage}, 100`);
@@ -114,10 +113,12 @@ function provideHint(guess) {
     
     if (guess < randomNumber) {
         feedback = '⬆️ Try a HIGHER number!';
-        hint = `💡 Hint: Between ${guess} and 100`;
+        hint = `💡 Hint: Between ${guess} and ${maxBoundary}`;
+        if (guess > minBoundary) minBoundary = guess;
     } else {
         feedback = '⬇️ Try a LOWER number!';
-        hint = `💡 Hint: Between 1 and ${guess}`;
+        hint = `💡 Hint: Between ${minBoundary} and ${guess}`;
+        if (guess < maxBoundary) maxBoundary = guess;
     }
     
     showFeedback(feedback, 'warning');
@@ -137,10 +138,11 @@ function provideHint(guess) {
 
 function showFeedback(message, type) {
     elements.feedbackArea.textContent = message;
-    elements.feedbackArea.className = `feedback-area ${type} show`;
+    elements.feedbackArea.className = `feedback-msg ${type}`;
     
     setTimeout(() => {
-        elements.feedbackArea.classList.remove('show');
+        elements.feedbackArea.className = '';
+        elements.feedbackArea.textContent = '';
     }, 3000);
 }
 
@@ -159,23 +161,29 @@ function addToHistory(guess) {
     }
     
     const historyItem = document.createElement('div');
-    historyItem.className = 'history-item';
     
     let hintText;
+    let typeClass = '';
+    
     if (guess === randomNumber) {
         hintText = '✅ Correct!';
+        typeClass = 'win';
     } else if (guess < randomNumber) {
         hintText = '⬆️ Too low';
+        typeClass = 'low';
     } else {
         hintText = '⬇️ Too high';
+        typeClass = 'high';
     }
     
+    historyItem.className = `history-item ${typeClass}`;
+    
     historyItem.innerHTML = `
-        <span class="history-item-guess">#${attempts}: ${guess}</span>
-        <span class="history-item-hint">${hintText}</span>
+        <span class="h-guess">#${attempts}: ${guess}</span>
+        <span class="h-hint">${hintText}</span>
     `;
     
-    elements.historyList.appendChild(historyItem);
+    elements.historyList.prepend(historyItem);
 }
 
 function winGame() {
@@ -189,7 +197,6 @@ function winGame() {
     setTimeout(() => {
         elements.modalIcon.textContent = '🏆';
         elements.modalTitle.textContent = 'YOU WIN!';
-        elements.modalTitle.className = 'modal-title win';
         
         let message = '';
         if (attempts === 1) {
@@ -217,7 +224,6 @@ function loseGame() {
     setTimeout(() => {
         elements.modalIcon.textContent = '😔';
         elements.modalTitle.textContent = 'GAME OVER';
-        elements.modalTitle.className = 'modal-title lose';
         elements.modalMessage.textContent = "Don't give up! Try again! 💪";
         elements.correctNumber.textContent = randomNumber;
         elements.totalAttempts.textContent = attempts;

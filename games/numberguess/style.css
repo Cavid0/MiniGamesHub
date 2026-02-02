@@ -30,7 +30,6 @@ body {
     overflow: hidden;
 }
 
-/* Background Animation */
 .circles {
     position: fixed;
     top: 0;
@@ -81,7 +80,6 @@ body {
     50% { transform: translate(30px, 30px); }
 }
 
-/* Main Container */
 .game-container {
     width: 95%;
     max-width: 1200px;
@@ -91,7 +89,6 @@ body {
     gap: 20px;
 }
 
-/* Nav */
 .game-nav {
     display: flex;
     justify-content: space-between;
@@ -102,6 +99,28 @@ body {
     border-radius: 20px;
     border: 1px solid var(--card-border);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.back-button:hover {
+    color: var(--primary-neon);
+    background: rgba(0, 242, 96, 0.1);
 }
 
 .brand {
@@ -165,13 +184,12 @@ body {
     border-color: var(--text-main);
 }
 
-/* Grid Layout */
 .game-grid {
     display: grid;
     grid-template-columns: 280px 1fr 280px;
     gap: 20px;
     flex: 1;
-    min-height: 0; /* Important for scroll */
+    min-height: 0; 
 }
 
 .console-panel {
@@ -201,7 +219,6 @@ body {
     letter-spacing: 2px;
 }
 
-/* Stats */
 .stat-card {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 16px;
@@ -240,7 +257,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Circular Progress */
 .circular-progress {
     width: 60px;
     height: 60px;
@@ -264,7 +280,6 @@ body {
     transition: stroke-dasharray 0.5s ease;
 }
 
-/* Main Gameplay */
 .main-panel {
     justify-content: center;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -316,6 +331,7 @@ body {
     color: white;
     border: none;
     padding: 18px;
+    margin-top: 10px;
     font-size: 1.1rem;
     font-weight: 700;
     border-radius: 15px;
@@ -336,7 +352,6 @@ body {
     transform: scale(0.98);
 }
 
-/* Feedback Area */
 .feedback-display {
     min-height: 60px;
     display: flex;
@@ -384,7 +399,6 @@ body {
     min-height: 20px;
 }
 
-/* History */
 .live-indicator {
     background: #ff0000;
     color: white;
@@ -454,7 +468,6 @@ body {
 }
 .log-icon { font-size: 2rem; display: block; margin-bottom: 10px; opacity: 0.5; }
 
-/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -475,7 +488,7 @@ body {
     width: 400px;
     background: linear-gradient(145deg, #1a1a2e, #16213e);
     border-radius: 30px;
-    padding: 5px; /* for gradient border effect */
+    padding: 5px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -485,94 +498,4 @@ body {
     border-radius: 25px;
     padding: 40px;
     text-align: center;
-}
-
-.trophy-icon {
-    font-size: 5rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
-}
-
-.result-body h2 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    background: linear-gradient(to right, #ba8b02, #181818); /* Default gold gradient placeholder */
-}
-
-.modal-title.win {
-    background: linear-gradient(to right, var(--primary-neon), #2196f3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.modal-title.lose {
-    background: linear-gradient(to right, #ff5252, #f50057);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.result-metrics {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px 0;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 20px;
-    border-radius: 15px;
-}
-
-.metric {
-    display: flex;
-    flex-direction: column;
-}
-
-.metric-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-}
-
-.metric-value {
-    font-size: 1.8rem;
-    font-weight: 800;
-}
-
-.btn-wide {
-    width: 100%;
-}
-
-@keyframes zoomIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .game-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        overflow-y: auto;
-        display: block;
-    }
-    
-    .console-panel {
-        margin-bottom: 20px;
-    }
-
-    .game-container {
-        height: auto;
-        padding-bottom: 20px;
-        overflow-y: auto;
-    }
-    
-    body {
-        align-items: flex-start;
-        padding-top: 20px;
-        overflow-y: auto;
-    }
 }

@@ -3,146 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Guess - Pro Edition</title>
+    <title>Mini Games Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="circles">
+    <div class="background-animation">
         <div class="circle circle-1"></div>
         <div class="circle circle-2"></div>
         <div class="circle circle-3"></div>
     </div>
-    
-    <div class="game-container">
-        <nav class="game-nav">
-            <div class="brand">
-                <div class="logo-wrapper">
-                    <span class="logo-text">SG</span>
+
+    <div class="hub-container">
+        <header class="hub-header">
+            <h1 class="hub-title">🎮 Mini Games Hub</h1>
+            <p class="hub-subtitle">Choose your challenge</p>
+        </header>
+
+        <div class="games-grid">
+            <div class="game-card" data-game="codebreaker">
+                <div class="card-content">
+                    <div class="game-icon-wrapper">
+                        <span class="game-icon">🔐</span>
+                    </div>
+                    <h2 class="game-title">Code Breaker</h2>
+                    <p class="game-description">
+                        Decrypt the secure 4-digit sequence using logic and deduction.
+                    </p>
+                    <div class="game-features">
+                        <span class="feature">6 Attempts</span>
+                        <span class="feature">Logic Puzzle</span>
+                    </div>
                 </div>
-                <div class="brand-text">
-                    <h1>Smart Guess</h1>
-                    <span class="badge">PRO</span>
-                </div>
+                <a href="games/codebreaker/index.html" class="play-button">
+                    <span>LAUNCH</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
-            <button class="btn-reset" id="new-game">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M23 4v6h-6M1 20v-6h6"></path>
-                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 1 20.49 15"></path>
-                </svg>
-                New Game
-            </button>
-        </nav>
 
-        <main class="game-grid">
-            <!-- Left Console: Stats -->
-            <aside class="console-panel stats-panel">
-                <div class="panel-header">
-                    <h2>Statistics</h2>
-                </div>
-                
-                <div class="stat-row">
-                    <div class="stat-card blue-glow">
-                        <span class="stat-label">Range</span>
-                        <span class="stat-value">1-100</span>
-                        <div class="stat-bar"></div>
+            <div class="game-card" data-game="numberguess">
+                <div class="card-content">
+                    <div class="game-icon-wrapper">
+                        <span class="game-icon">🎲</span>
+                    </div>
+                    <h2 class="game-title">Number Guess</h2>
+                    <p class="game-description">
+                        Find the hidden number between 1-100 with smart boundary hints.
+                    </p>
+                    <div class="game-features">
+                        <span class="feature">5 Attempts</span>
+                        <span class="feature">Dynamic Hints</span>
                     </div>
                 </div>
-
-                <div class="stat-row">
-                    <div class="stat-card pink-glow">
-                        <span class="stat-label">Attempts</span>
-                        <span class="stat-value"><span id="current-attempt">0</span><span class="max-val">/5</span></span>
-                        
-                        <div class="circular-progress">
-                            <svg viewBox="0 0 36 36">
-                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <path class="circle-fill" id="circular-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Center Console: Gameplay -->
-            <section class="console-panel main-panel">
-                <div class="game-display">
-                    <div class="display-content">
-                        <span class="input-label">ENTER YOUR GUESS</span>
-                        <div class="input-group">
-                            <input 
-                                type="number" 
-                                id="guess-input" 
-                                class="neon-input" 
-                                min="1" 
-                                max="100" 
-                                placeholder="00"
-                                autofocus
-                            >
-                        </div>
-                        <button class="btn-primary" id="submit-guess">
-                            GUESS NUMBER
-                            <div class="btn-glitch"></div>
-                        </button>
-                    </div>
-
-                    <div id="feedback-area" class="feedback-display">
-                        <span class="feedback-placeholder">Waiting for input...</span>
-                    </div>
-                    
-                    <div id="hint-area" class="hint-display"></div>
-                </div>
-            </section>
-
-            <!-- Right Console: History -->
-            <aside class="console-panel history-panel">
-                <div class="panel-header">
-                    <h2>History Log</h2>
-                    <span class="live-indicator">LIVE</span>
-                </div>
-                <div id="history-list" class="history-list custom-scroll">
-                    <div class="empty-log">
-                        <span class="log-icon">📝</span>
-                        <p>No data recorded</p>
-                    </div>
-                </div>
-            </aside>
-        </main>
-    </div>
-
-    <div class="modal-overlay" id="result-modal">
-        <div class="result-card-3d">
-            <div class="card-inner">
-                <div class="result-header">
-                    <div class="trophy-icon" id="modal-icon">🏆</div>
-                </div>
-                <div class="result-body">
-                    <h2 id="modal-title">VICTORY</h2>
-                    <p id="modal-message">Target acquired successfully!</p>
-                    
-                    <div class="result-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Target</span>
-                            <span class="metric-value" id="correct-number">0</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Attempts</span>
-                            <span class="metric-value" id="total-attempts">0</span>
-                        </div>
-                    </div>
-
-                    <button class="btn-primary btn-wide" id="play-again">
-                        PLAY AGAIN
-                    </button>
-                </div>
+                <a href="games/numberguess/index.html" class="play-button">
+                    <span>LAUNCH</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
+
+        <footer class="hub-footer">
+            <p>Select a game to start playing</p>
+        </footer>
     </div>
 
-    <div id="confetti-container"></div>
-
-    <script src="script.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
