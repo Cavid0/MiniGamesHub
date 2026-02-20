@@ -22,5 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === '1') window.location.href = 'games/codebreaker/index.html';
         if (e.key === '2') window.location.href = 'games/numberguess/index.html';
+        if (e.key === '3') window.location.href = 'games/snake/index.html';
+        if (e.key === '4') window.location.href = 'games/tictactoe/index.html';
     });
 });

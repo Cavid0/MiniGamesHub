@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="page-wrapper">
+
+        <nav class="game-nav">
+            <a href="../../index.html" class="back-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Back</span>
+            </a>
+
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/>
+                        <line x1="2" y1="8" x2="22" y2="8"/><line x1="2" y1="16" x2="22" y2="16"/>
+                    </svg>
+                </div>
+                <span class="brand-name">Tic‑Tac‑Toe</span>
+                <span class="brand-badge">2 PLAYERS</span>
+            </div>
+
+            <div class="nav-right">
+                <button class="icon-btn" id="edit-names-btn" title="Edit player names">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </button>
+                <button class="icon-btn danger" id="reset-btn" title="Reset game">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 4v6h-6M1 20v-6h6"></path>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 1 20.49 15"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div class="game-layout">
+
+            <div class="player-card" id="card-x" data-player="x">
+                <div class="player-mark x-mark">✕</div>
+                <div class="player-info">
+                    <span class="player-label">PLAYER 1</span>
+                    <span class="player-name" id="name-x">Player 1</span>
+                </div>
+                <div class="player-score" id="score-x">0</div>
+                <div class="turn-indicator" id="turn-x">
+                    <div class="dot"></div> YOUR TURN
+                </div>
+            </div>
+
+            <main class="board-area">
+                <div class="status-bar" id="status-text">Start game or select a player</div>
+                <div class="board" id="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                <div class="draws-row">
+                    <span class="draws-label">DRAWS</span>
+                    <span class="draws-value" id="score-draw">0</span>
+                </div>
+            </main>
+
+            <div class="player-card" id="card-o" data-player="o">
+                <div class="player-mark o-mark">○</div>
+                <div class="player-info">
+                    <span class="player-label">PLAYER 2</span>
+                    <span class="player-name" id="name-o">Player 2</span>
+                </div>
+                <div class="player-score" id="score-o">0</div>
+                <div class="turn-indicator" id="turn-o">
+                    <div class="dot"></div> YOUR TURN
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="modal-backdrop hidden">
+        <div class="modal-card" id="result-card">
+            <div class="modal-glow" id="modal-glow"></div>
+            <div class="modal-icon" id="modal-icon">✕</div>
+            <h2 class="modal-title" id="modal-title">Winner!</h2>
+            <p class="modal-sub" id="modal-sub">Congratulations on the win</p>
+            
+            <div class="modal-actions">
+                <button class="btn-play-again" id="play-again-btn">Play Again</button>
+                <button class="btn-reset-all" id="reset-all-btn">Reset All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Names Modal -->
+    <div id="names-modal" class="modal-backdrop hidden">
+        <div class="modal-card names-modal-card">
+            <h3 class="modal-title" style="font-size: 1.5rem;">Edit Names</h3>
+            <div class="name-inputs">
+                <div class="name-field">
+                    <label class="x-label">Player X</label>
+                    <input type="text" id="input-x" placeholder="Enter name" maxlength="10">
+                </div>
+                <div class="name-field">
+                    <label class="o-label">Player O</label>
+                    <input type="text" id="input-o" placeholder="Enter name" maxlength="10">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-play-again" id="save-names-btn">Save Names</button>
+                <button class="btn-reset-all" id="cancel-names-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
